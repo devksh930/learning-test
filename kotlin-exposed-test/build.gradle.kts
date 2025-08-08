@@ -10,7 +10,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:0.52.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.52.0")
     implementation("mysql:mysql-connector-java:8.0.33")
-    runtimeOnly("io.github.oshai:kotlin-logging-jvm:7.0.12")
+    implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.3")
     testImplementation(kotlin("test"))
 

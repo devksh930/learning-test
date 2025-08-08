@@ -1,11 +1,12 @@
 package me.learning
 
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.dao.id.LongIdTable
+import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.javatime.datetime
 import java.time.LocalDateTime
 
 
-abstract class BaseTable(name: String) : Table(name) {
+abstract class BaseTable(name: String) : LongIdTable(name) {
     val createdAt: Column<LocalDateTime> =
         datetime("created_at").clientDefault { LocalDateTime.now() }
 
