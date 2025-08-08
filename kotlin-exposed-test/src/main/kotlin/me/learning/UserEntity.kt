@@ -10,6 +10,7 @@ class UserEntity(id: EntityID<Long>) : LongEntity(id) {
     var name by User.name
     var email by User.email
     var birthDay by User.birthDay
+    var gender by User.gender
 
     fun changeName(newName: String) {
         name = newName

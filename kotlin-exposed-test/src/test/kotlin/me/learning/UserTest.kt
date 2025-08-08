@@ -1,13 +1,8 @@
 package me.learning
 
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.addLogger
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 import java.time.LocalDate
 import kotlin.test.AfterTest
 import kotlin.test.Test
@@ -37,6 +32,7 @@ class UserTest {
                 name = "김성호"
                 email = "test@test.com"
                 birthDay = LocalDate.now()
+                gender = Gender.MALE
             }
 
             val findById = UserEntity.findById(1L)
@@ -56,6 +52,7 @@ class UserTest {
                 it[name] = "김성호"
                 it[email] = "test@test.com"
                 it[birthDay] = LocalDate.now()
+                it[gender] = Gender.MALE
             } get User.id
 
             val findById = UserEntity.findById(1L)
@@ -72,6 +69,13 @@ class UserTest {
             addLogger(KotlinSqlLogger)
             SchemaUtils.create(User)
 
+            User.insert {
+                it[name] = "김성호"
+                it[email] = "test@test.com"
+                it[birthDay] = LocalDate.now()
+                it[gender] = Gender.MALE
+            } get User.id
+
             val findById = UserEntity.findById(1L)
             findById?.changeName("김성호")
 
@@ -85,6 +89,13 @@ class UserTest {
         transaction {
             addLogger(KotlinSqlLogger)
             SchemaUtils.create(User)
+
+            User.insert {
+                it[name] = "김성호"
+                it[email] = "test@test.com"
+                it[birthDay] = LocalDate.now()
+                it[gender] = Gender.MALE
+            } get User.id
 
             User.update({ User.id eq 1L }) {
                 it[name] = "홍길동"
@@ -100,10 +111,18 @@ class UserTest {
             addLogger(KotlinSqlLogger)
             SchemaUtils.create(User)
 
+            User.insert {
+                it[name] = "김성호"
+                it[email] = "test@test.com"
+                it[birthDay] = LocalDate.now()
+                it[gender] = Gender.MALE
+            } get User.id
+
             val id = User.insert {
                 it[name] = "김성호"
                 it[email] = "test@test.com"
                 it[birthDay] = LocalDate.now()
+                it[gender] = Gender.MALE
             } get User.id
 
             UserEntity.findById(id)?.delete()
@@ -116,6 +135,13 @@ class UserTest {
         transaction {
             addLogger(KotlinSqlLogger)
             SchemaUtils.create(User)
+
+            User.insert {
+                it[name] = "김성호"
+                it[email] = "test@test.com"
+                it[birthDay] = LocalDate.now()
+                it[gender] = Gender.MALE
+            } get User.id
 
             User.deleteWhere { User.id eq 1L }
         }
