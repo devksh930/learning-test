@@ -12,4 +12,7 @@ object User : BaseTable("users") {
         fromDb = { value -> Gender.valueOf(value as String) },
         toDb = { it.name }
     )
+    init{
+        index("idx_name_email", true, name, email)
+    }
 }
